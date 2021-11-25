@@ -1,0 +1,19 @@
+#! /bin/bash
+set -e
+cd /autograder
+
+mkdir -p      build
+chgrp student build
+chmod 775     build
+
+# We can't do this in the demo container
+# 'cause these folders are mounted read-only.
+if [ "$1" != "readonly" ]; then
+  chmod 700 results
+  chmod 500 source
+fi
+
+# Just to annoy people who won't test locally...
+# sleep "$(( $RANDOM % 180 + 300 ))"
+
+python3 source/tests.py > results/results.json

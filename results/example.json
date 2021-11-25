@@ -1,0 +1,58 @@
+{
+    "tests": [
+        {
+            "name": "Crasher: Compilation",
+            "score": 5,
+            "max_score": 5
+        },
+        {
+            "name": "Crasher: Double Free",
+            "score": 0.0,
+            "max_score": 5,
+            "output": "Test Failed: Execution aborted.\n\nReading symbols from build/crasher...\nfree(): double free detected in tcache 2\n\nProgram received signal SIGABRT, Aborted.\n__GI_raise (sig=sig@entry=6) at ../sysdeps/unix/sysv/linux/raise.c:50\n50\t../sysdeps/unix/sysv/linux/raise.c: No such file or directory.\n#0  __GI_raise (sig=sig@entry=6) at ../sysdeps/unix/sysv/linux/raise.c:50\n#1  0x00007f2b18c96859 in __GI_abort () at abort.c:79\n#2  0x00007f2b18d013ee in __libc_message (action=action@entry=do_abort, fmt=fmt@entry=0x7f2b18e2b285 \"%s\\n\") at ../sysdeps/posix/libc_fatal.c:155\n#3  0x00007f2b18d0947c in malloc_printerr (str=str@entry=0x7f2b18e2d5d0 \"free(): double free detected in tcache 2\") at malloc.c:5347\n#4  0x00007f2b18d0b0ed in _int_free (av=0x7f2b18e5cb80 <main_arena>, p=0x55d0c57bdea0, have_lock=0) at malloc.c:4201\n#5  0x000055d0c485faeb in doublefree () at submission/doublefree.cpp:6\n#6  0x000055d0c485f545 in main (argc=2, argv=0x7ffd518ee138) at submission/crasher.cpp:14\n\n"
+        },
+        {
+            "name": "Crasher: Memory Leak",
+            "score": 0.0,
+            "max_score": 5,
+            "output": "Test Failed: Memory leak or bad memory access.\n\n==48== Memcheck, a memory error detector\n==48== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.\n==48== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info\n==48== Command: build/crasher memleak\n==48== Parent PID: 47\n==48== \n==48== \n==48== HEAP SUMMARY:\n==48==     in use at exit: 4 bytes in 1 blocks\n==48==   total heap usage: 2 allocs, 1 frees, 72,708 bytes allocated\n==48== \n==48== 4 bytes in 1 blocks are definitely lost in loss record 1 of 1\n==48==    at 0x483BE63: operator new(unsigned long) (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)\n==48==    by 0x10AAFF: memleak() (memleak.cpp:4)\n==48==    by 0x10A580: main (crasher.cpp:20)\n==48== \n==48== LEAK SUMMARY:\n==48==    definitely lost: 4 bytes in 1 blocks\n==48==    indirectly lost: 0 bytes in 0 blocks\n==48==      possibly lost: 0 bytes in 0 blocks\n==48==    still reachable: 0 bytes in 0 blocks\n==48==         suppressed: 0 bytes in 0 blocks\n==48== \n==48== For lists of detected and suppressed errors, rerun with: -s\n==48== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)\n\n"
+        },
+        {
+            "name": "Crasher: Segmentation Fault",
+            "score": 0.0,
+            "max_score": 5,
+            "output": "Test Failed: Segmentation fault.\n\nReading symbols from build/crasher...\n\nProgram received signal SIGSEGV, Segmentation fault.\n0x0000556169d17b1d in segfault () at submission/segfault.cpp:5\n5\t  *boom = 42;\n#0  0x0000556169d17b1d in segfault () at submission/segfault.cpp:5\n#1  0x0000556169d17563 in main (argc=2, argv=0x7ffe4dc78868) at submission/crasher.cpp:17\n\n"
+        },
+        {
+            "name": "Poetry: Hygiene",
+            "score": 0.0,
+            "max_score": 5,
+            "output": "Test Failed: Don't check compiled code into Git (consider using a .gitignore file):\n - poetry/a.out\n"
+        },
+        {
+            "name": "Poetry: Compilation",
+            "score": 5,
+            "max_score": 5
+        },
+        {
+            "name": "Poetry: Limerick",
+            "score": 5,
+            "max_score": 5
+        },
+        {
+            "name": "Poetry: Sonnet",
+            "score": 0.0,
+            "max_score": 5,
+            "output": "Test Failed: Unexpected output (stdout).\n\n  Let me not to the marriage of true minds\n  Admit impediments, love is not love\n  Which alters when it alteration finds,\n  Or bends with the remover to remove.\n- O no, it is an ever fixed mark\n?                        ^\n+ O no, it is an ever fix\u00e8d mark\n?                        ^\n  That looks on tempests and is never shaken;\n  It is the star to every wand'ring bark,\n  Whose worth's unknown although his height be taken.\n  Love's not time's fool, though rosy lips and cheeks\n  Within his bending sickle's compass come,\n  Love alters not with his brief hours and weeks,\n  But bears it out even to the edge of doom:\n    If this be error and upon me proved,\n    I never writ, nor no man ever loved.\n\n"
+        },
+        {
+            "name": "Poetry: Haiku",
+            "score": 5,
+            "max_score": 5
+        }
+    ],
+    "leaderboard": [],
+    "visibility": "visible",
+    "execution_time": "4.08",
+    "score": 20.0
+}
